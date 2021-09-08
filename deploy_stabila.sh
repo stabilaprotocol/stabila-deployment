@@ -85,11 +85,11 @@ fi
 
 cd $BIN_PATH
 if [ $NET == "mainnet" ]; then
-  wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/main_net_config.conf -O main_net_config.conf
+  wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/main_net_config.conf -O main_net_config.conf
   RELEASE=`curl --silent "https://api.github.com/repos/stabilaprotocol/java-stabila/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'`
   CONF_PATH=$BIN_PATH/main_net_config.conf
 elif [ $NET == "testnet" ]; then
-  wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/test_net_config.conf -O test_net_config.conf
+  wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/test_net_config.conf -O test_net_config.conf
   CONF_PATH=$BIN_PATH/test_net_config.conf
 fi
 
