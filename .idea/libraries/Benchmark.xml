@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Benchmark">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Benchmark.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
