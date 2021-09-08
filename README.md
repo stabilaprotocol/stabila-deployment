@@ -5,7 +5,7 @@ Just Support FullNode and SolidityNode.
 ## Download and run script
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
 ```
 
 ## Parameter Illustration
@@ -29,14 +29,14 @@ bash deploy_stabila.sh --app [FullNode|SolidityNode] --net [mainnet|testnet|priv
 ### Deployment of FullNode on the one host.
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
 bash deploy_stabila.sh
 ```
 
 ### Deployment of SolidityNode on the one host.
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
 # User can self-configure the IP and Port of GRPC service in the turst-node field of SolidityNode. trust-node is the fullnode you just deploy.
 bash deploy_stabila.sh --app SolidityNode --trust-node <grpc-ip:grpc-port>
 ```
@@ -45,7 +45,7 @@ bash deploy_stabila.sh --app SolidityNode --trust-node <grpc-ip:grpc-port>
 
 ```shell
 # You need to configure different gRPC ports on the same host because gRPC port is available on SolidityNode and FullNodeConfigure and it cannot be set as default value 50051. In this case the default value of rpc port is set as 50041.
-wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
 bash deploy_stabila.sh --app FullNode
 bash deploy_stabila.sh --app SolidityNode --rpc-port 50041
 ```
@@ -59,7 +59,7 @@ Please follow the guide on https://github.com/stabilaprotocol/grpc-gateway
 Install Golang, Protoc, and set $GOPATH environment variable according to your requirement.
 ### Download and run script
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/TronDeployment/master/deploy_grpc_gateway.sh -O deploy_grpc_gateway.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_grpc_gateway.sh -O deploy_grpc_gateway.sh
 ```
 ### Parameter Illustration
 ```shell
