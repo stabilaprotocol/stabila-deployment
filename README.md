@@ -5,7 +5,7 @@ Just Support FullNode and SolidityNode.
 ## Download and run script
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/stabila-deployment/master/deploy_stabila.sh -O deploy_stabila.sh
 ```
 
 ## Parameter Illustration
