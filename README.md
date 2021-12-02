@@ -1,80 +1,51 @@
-## Scope of use
-This script could be used on Linux/MacOS, but not on Windows.
-Just Support FullNode and SolidityNode.
+## Linux installation and deploy
+Docker file Dockerfile provides execution environment for FullNode.<br/>
+Bash script deploy.sh manages installation, deploy and lifecycle of FullNode execution.
 
-## Download and run script
+## Download Dockerfile and deploy.sh files
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/stabila-deployment/master/deploy_stabila.sh -O deploy_stabila.sh
+wget https://raw.githubusercontent.com/stabilaprotocol/stabila-deployment/master/Dockerfile -O Dockerfile
+wget https://raw.githubusercontent.com/stabilaprotocol/stabila-deployment/master/deploy.sh -O deploy.sh
+```
+## Run deploy.sh script
+```shell
+bash deploy.sh start 8090
+# In case warning message containing "The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 7EA0A9C3F273FCD8" is displayed, run:
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7EA0A9C3F273FCD8
+# sudo apt-get update
+# and try again "bash deploy.sh start 8090"
 ```
 
 ## Parameter Illustration
 
 ```shell
-bash deploy_stabila.sh --app [FullNode|SolidityNode] --net [mainnet|testnet|privatenet] --db [keep|remove|backup] --heap-size <heapsize>
+bash deploy.sh [start|stop|restart] port path-to-json-file
 
---app	Optional, Running application. The default node is Fullnode and it could be FullNode or SolidityNode.
---net	Optional, Connecting network. The default network is mainnet and it could be mainnet, testnet.
---db	Optional, The way of data processing could be keep, remove and backup. Default is keep. If you launch two different networks, like from mainnet to testnet or from testnet to mainnet, you need to delete database.
---trust-node	Optional, It only works when deploying SolidityNode. Default is 127.0.0.1:50051. The specified gRPC service of Fullnode, like 127.0.0.1:50051 or 13.125.249.129:50051.
---rpc-port	Optional, Port of grpc. Default is 50051. If you deploy SolidityNode and FullNode on the same host，you need to configure different ports.
---commit	Optional, commitid of project.
---branch	Optional, branch of project.  Mainnet default is latest release and Testnet default is master.
---heap-size  Optional, jvm option: Xmx. The default heap-size is 0.8 * memory size.
---work_space  Optional, default is current directory.
+start : install (if not already installed) docker, fetch images, build local image and start FullNode.jar application.
+stop : stop FullNode.jar application and related docker container.
+restart : restart FullNode.jar application.
+port : required, port on which docker container will run
+path-to-json-file : optional, path to the file (create manually) containing executive private key for seed node, default is peer node
 ```
 
 ## Examples
 
-### Deployment of FullNode on the one host.
+### Scripts execution
 
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
-bash deploy_stabila.sh
+bash deploy.sh start 8090
+bash deploy.sh restart 8090
+bash deploy.sh stop 8090
+
+bash deploy.sh start 8091 '/home/user/secret.json'
+bash deploy.sh restart 8091 '/home/user/secret.json'
+bash deploy.sh stop 8091
 ```
 
-### Deployment of SolidityNode on the one host.
-
+### Test execution
 ```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
-# User can self-configure the IP and Port of GRPC service in the turst-node field of SolidityNode. trust-node is the fullnode you just deploy.
-bash deploy_stabila.sh --app SolidityNode --trust-node <grpc-ip:grpc-port>
+bash deploy.sh start 8090
+curl -X POST -k http://127.0.0.1:8090/wallet/listexecutives
 ```
-
-### Deployment of FullNode and SolidityNode on the same host.
-
-```shell
-# You need to configure different gRPC ports on the same host because gRPC port is available on SolidityNode and FullNodeConfigure and it cannot be set as default value 50051. In this case the default value of rpc port is set as 50041.
-wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_stabila.sh -O deploy_stabila.sh
-bash deploy_stabila.sh --app FullNode
-bash deploy_stabila.sh --app SolidityNode --rpc-port 50041
-```
-
-## Deployment of grpc gateway
-
-### Summary
-This script helps you download the code from https://github.com/stabilaprotocol/grpc-gateway and deploy the code on your environment.
-### Pre-requests
-Please follow the guide on https://github.com/stabilaprotocol/grpc-gateway 
-Install Golang, Protoc, and set $GOPATH environment variable according to your requirement.
-### Download and run script
-```shell
-wget https://raw.githubusercontent.com/stabilaprotocol/StabilaDeployment/master/deploy_grpc_gateway.sh -O deploy_grpc_gateway.sh
-```
-### Parameter Illustration
-```shell
-bash deploy_grpc_gateway.sh --rpchost [rpc host ip] --rpcport [rpc port number] --httpport [http port number] 
-
---rpchost The fullnode or soliditynode IP where the grpc service is provided. Default value is "localhost".
---rpcport The fullnode or soliditynode port number grpc service is consuming. Default value is 50051.
---httpport The port intends to provide http service provided by grpc gateway. Default value is 18890.
-```
-### Example
-Use default configuration：
-```shell
-bash deploy_grpc_gateway.sh
-```
-Use customized configuration：
-```shell
-bash deploy_grpc_gateway.sh --rpchost 127.0.0.1 --rpcport 50052 --httpport 18891
-```
+If you get executive-list json data then FullNode started successfully.
