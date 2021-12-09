@@ -1,7 +1,5 @@
 <h1 align="center">
-  <br>
-  <img width="200" src="https://raw.githubusercontent.com/stabilaprotocol/wiki/master/images/Logo_Stabila_WhiteMetal.png">
-  <br>
+  <img align="center" src="https://raw.githubusercontent.com/stabilaprotocol/wiki/master/images/Logo_Stabila_WhiteMetal.png" width="200"/>
 </h1>
 
 ## Scope of use
