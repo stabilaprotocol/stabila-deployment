@@ -1,3 +1,7 @@
+<h1 align="center">
+  <img align="center" src="https://raw.githubusercontent.com/stabilaprotocol/wiki/master/images/Logo_Stabila_WhiteMetal.png" width="200"/>
+</h1>
+
 ## Linux installation and deploy
 Docker file Dockerfile provides execution environment for FullNode.<br/>
 Bash script deploy.sh manages installation, deploy and lifecycle of FullNode execution.
@@ -48,4 +52,8 @@ bash deploy.sh stop 8091
 bash deploy.sh start 8090
 curl -X POST -k http://127.0.0.1:8090/wallet/listexecutives
 ```
+
 If you get executive-list json data then FullNode started successfully.
+
+## Suggestions, Feedback & Issues
+If you have a suggestion for improvement, feedback about a specific feature or any issue please contact us at info@stabilascan.org
